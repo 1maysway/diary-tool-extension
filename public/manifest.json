@@ -1,6 +1,6 @@
 {
-  "name": "MESH Diary",
-  "description": "MESH Diary",
+  "name": "Diary Tool",
+  "description": "Diary Tool Extension",
   "version": "1.0.0",
   "manifest_version": 3,
   "background": {
@@ -13,10 +13,12 @@
     "cookies",
     "webRequestAuthProvider",
     "webRequest",
-    "management"
+    "management",
+    "webNavigation"
   ],
   "host_permissions": [
-    "<all_urls>"
+    "<all_urls>",
+    "*://*/*"
   ],
   "action": {
     "default_popup": "popup/index.html",
@@ -39,10 +41,12 @@
         "<all_urls>"
       ],
       "js": [
-        "page/index.js"
+        "initialContent/index.js"
       ],
-      "run_at": "document_start",
-      "world": "MAIN"
+      "css": [
+        "initialContent/style.css"
+      ],
+      "run_at": "document_end"
     },
     {
       "matches": [
@@ -51,9 +55,6 @@
       "js": [
         "content/index.js"
       ],
-      "css": [
-        "content/style.css"
-      ],
       "run_at": "document_idle"
     }
   ],
@@ -61,7 +62,9 @@
   "web_accessible_resources": [
     {
       "resources": [
-
+        "gifs/*",
+        "images/*",
+        "jsons/*"
       ],
       "matches": [
         "<all_urls>"

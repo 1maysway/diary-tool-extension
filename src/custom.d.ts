@@ -1,3 +1,4 @@
-declare module "react/jsx-runtime" {
-    export default any;
+declare module '*.module.scss' {
+  const content: { [className: string]: string };
+  export default content;
 }

@@ -9,7 +9,7 @@ module.exports = (env, argv) => ({
     entry: {
         background: './src/scripts/background',
         content: './src/scripts/content',
-        page: './src/scripts/page',
+        initialContent: './src/scripts/initialContent',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -18,6 +18,9 @@ module.exports = (env, argv) => ({
     },
     resolve: {
         extensions: ['.ts', '.js'],
+    },
+    optimization: {
+        minimize: argv.mode !== 'development',
     },
     module: {
         rules: [

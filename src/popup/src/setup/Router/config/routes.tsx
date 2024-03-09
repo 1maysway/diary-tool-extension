@@ -1,6 +1,6 @@
 import React from "react";
 import {RouteObj} from "../../../contexts";
-import { Main, Settings } from "../../../pages";
+import {Logins, Main, Settings } from "../../../pages";
 import {PATHS} from "./paths";
 
 const routes: RouteObj[] = [
@@ -8,6 +8,11 @@ const routes: RouteObj[] = [
         path: PATHS.root,
         element: <Main />,
         name: 'Главная',
+    },
+    {
+        path: PATHS.logins,
+        element: <Logins />,
+        name: 'Аккаунты',
     },
     {
         path: PATHS.settings,

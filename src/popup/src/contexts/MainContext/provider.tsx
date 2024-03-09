@@ -1,6 +1,16 @@
-import {AppSettingsValues, LoginData, APP_STORAGE_PATHS, defaultLogins, defaultSettings, Stand, defaultStands} from 'shared';
-import {MainContext, SelectedData} from "./context";
+import {
+    AppSettingsValues,
+    LoginData,
+    APP_STORAGE_PATHS,
+    defaultLogins,
+    defaultSettings,
+    Stand,
+    defaultStands,
+    SelectedData
+} from 'shared';
+import {MainContext} from "./context";
 import React, {PropsWithChildren, useEffect, useState} from "react";
+import packageJson from '../../../../../package.json';
 
 export const MainContextProvider = ({children}: PropsWithChildren<unknown>) => {
     const [logins, setLogins] = useState<LoginData[]>();
@@ -13,7 +23,7 @@ export const MainContextProvider = ({children}: PropsWithChildren<unknown>) => {
             const storagedData = await chrome.storage.local.get([
                 APP_STORAGE_PATHS.settings, APP_STORAGE_PATHS.logins, APP_STORAGE_PATHS.stands, APP_STORAGE_PATHS.selectedData,
             ]);
-            setLogins(storagedData[APP_STORAGE_PATHS.logins]);
+            setLogins((storagedData[APP_STORAGE_PATHS.logins] as LoginData[]).sort((a, b) => b.createdMs - a.createdMs));
             setSettings(storagedData[APP_STORAGE_PATHS.settings]);
             setStands(storagedData[APP_STORAGE_PATHS.stands]);
             setSelectedData(storagedData[APP_STORAGE_PATHS.selectedData]);
@@ -21,10 +31,16 @@ export const MainContextProvider = ({children}: PropsWithChildren<unknown>) => {
 
         const onStorageChange = (changes: Record<string, chrome.storage.StorageChange>) => {
             if (changes[APP_STORAGE_PATHS.logins]) {
-                setLogins(changes[APP_STORAGE_PATHS.logins].newValue);
+                setLogins((changes[APP_STORAGE_PATHS.logins].newValue as LoginData[]).sort((a, b) => b.createdMs - a.createdMs));
             }
             if (changes[APP_STORAGE_PATHS.settings]) {
                 setSettings(changes[APP_STORAGE_PATHS.settings].newValue);
+            }
+            if (changes[APP_STORAGE_PATHS.stands]) {
+                setStands(changes[APP_STORAGE_PATHS.stands].newValue);
+            }
+            if (changes[APP_STORAGE_PATHS.selectedData]) {
+                setSelectedData(changes[APP_STORAGE_PATHS.selectedData].newValue);
             }
         }
 
@@ -40,6 +56,7 @@ export const MainContextProvider = ({children}: PropsWithChildren<unknown>) => {
         settings: settings || defaultSettings,
         stands: stands || defaultStands,
         selectedData: selectedData,
+        appVersion: packageJson.version,
         setSelectedData: (selectedData) => {
             setSelectedData(selectedData);
             chrome.storage.local.set({[APP_STORAGE_PATHS.selectedData]: JSON.stringify(selectedData)});
@@ -57,12 +74,11 @@ export const MainContextProvider = ({children}: PropsWithChildren<unknown>) => {
             chrome.storage.local.set({[APP_STORAGE_PATHS.stands]: JSON.stringify(stands)});
         },
     };
-    console.log(value)
 
     return (
         <MainContext.Provider value={value}>
             {
-                children
+                logins && children
             }
         </MainContext.Provider>
     );

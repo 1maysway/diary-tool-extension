@@ -1,7 +1,8 @@
-import {PropsWithChildren} from "react";
+import React, {PropsWithChildren} from "react";
 import {ContentInnerWrapperStyled, ContentWrapperStyled, WrapperStyled } from "./index.styled";
 import {MainContextProvider, RouteContextProvider} from "../../../contexts";
 import { Header } from "../Header";
+import { StatusBar } from "../StatusBar";
 
 
 export const MainLayout = ({ children }: PropsWithChildren<unknown>) => {
@@ -16,6 +17,7 @@ export const MainLayout = ({ children }: PropsWithChildren<unknown>) => {
                                 children
                             }
                         </ContentInnerWrapperStyled>
+                        <StatusBar />
                     </ContentWrapperStyled>
                 </WrapperStyled>
             </MainContextProvider>

@@ -1,3 +1,8 @@
-import './style.scss';
+import {listenMessages, sendMessageExt} from '../../shared';
 
-export const a = '';
+
+console.log('CONTENT');
+
+listenMessages('content');
+
+sendMessageExt('background', 'idle', {});

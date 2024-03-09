@@ -1,4 +1,5 @@
 import {TextStyled, WrapperStyled} from "./index.styled";
+import React from "react";
 
 
 type Props = {

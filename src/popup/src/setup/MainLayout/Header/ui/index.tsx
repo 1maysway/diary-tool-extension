@@ -1,4 +1,4 @@
-import {useContext, useState } from 'react';
+import React, {useContext, useMemo, useState} from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
@@ -20,19 +20,21 @@ export const Header = () => {
         setPath(path);
     };
 
-    console.log(path, routes)
+    const currentRoute = useMemo(() => {
+        return routes.find(route => route.path === path);
+    }, [path]);
 
     return (
         <ClickAwayListener onClickAway={() => setExpanded(false)}>
             <WrapperStyled>
-                <Accordion expanded={expanded} onChange={() => setExpanded(!expanded)}>
+                <Accordion expanded={expanded} onChange={() => setExpanded(!expanded)} elevation={2}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="header-content"
                         id="header"
                     >
                         <Typography>
-                            Diary Tool
+                            Diary Tool - {currentRoute?.name}
                         </Typography>
                     </AccordionSummary>
                     <ButtonsWrapperStyled>

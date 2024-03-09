@@ -1,12 +1,6 @@
-import {AppSettingsValues, defaultLogins, defaultSettings, defaultStands, LoginData, Stand} from "shared";
+import {AppSettingsValues, defaultLogins, defaultSettings, defaultStands, LoginData, SelectedData, Stand} from "shared";
 import {createContext} from "react";
 
-
-export type SelectedData = {
-    loginId: number,
-    standId: string,
-    workTabId: number,
-};
 
 export type MainContext = {
     logins: LoginData[];
@@ -17,6 +11,7 @@ export type MainContext = {
     setStands: (stands: Stand[]) => void,
     selectedData?: SelectedData,
     setSelectedData: (selectedData: SelectedData) => void,
+    appVersion: string,
 };
 
 const MainContextDefault: MainContext = {
@@ -28,6 +23,7 @@ const MainContextDefault: MainContext = {
     setStands: () => {},
     selectedData: undefined,
     setSelectedData: () => {},
+    appVersion: '1.0.0',
 };
 
 export const MainContext = createContext(MainContextDefault);

@@ -8,11 +8,12 @@
     "sourceMap": false,
     "forceConsistentCasingInFileNames": true,
     "outDir": "dist",
-    "declaration": true,
-    "declarationDir": "./@types",
+    "declaration": false,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "nodenext",
     "resolveJsonModule": true,
+    "jsx": "react",
+    "skipLibCheck": true
   },
   "include": [
     "src/**/*.ts",

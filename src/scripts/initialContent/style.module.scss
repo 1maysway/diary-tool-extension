@@ -3,12 +3,37 @@
   height: 100vh;
   background-color: white;
   position: fixed;
-  z-index: 2147483647;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  gap: 16px;
+  gap: 24px;
+  padding-top: 15vh;
   top: 0;
   left: 0;
+  opacity: 0;
+  animation: fadeInFromNone 0.1s ease-in-out forwards;
+}
+
+@keyframes fadeInFromNone {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.gif {
+  width: 300px !important;
+}
+
+.title {
+  font-size: 48px;
+}
+
+.fact {
+  font-size: 24px;
+  max-width: 600px;
+  text-align: center;
 }

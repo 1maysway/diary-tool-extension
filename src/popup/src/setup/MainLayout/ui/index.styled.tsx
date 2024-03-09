@@ -9,11 +9,14 @@ const ContentWrapperStyled = styled('div')(({ theme }) => ({
     paddingTop: theme.spacing(6),
     height: '100vh',
     boxSizing: 'border-box',
+    display: 'flex',
+    flexDirection: 'column',
 }));
 
 const ContentInnerWrapperStyled = styled('div')(({ theme }) => ({
     overflow: 'auto',
-    height: '100%',
+    flexGrow: 1,
+    boxSizing: 'border-box',
 }));
 
 export {
