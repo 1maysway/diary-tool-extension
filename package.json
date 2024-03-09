@@ -1,8 +1,8 @@
 {
+  "private": true,
   "name": "diary-extension",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "build:dev": "npm run build:popup:dev && npm run build:other:dev",
     "build:prod": "build:popup:prod && npm run build:other:prod",
@@ -15,6 +15,9 @@
   "keywords": [],
   "author": "maysway",
   "license": "ISC",
+  "workspaces": {
+    "popup": "src/popup"
+  },
   "devDependencies": {
     "@babel/core": "^7.23.2",
     "@babel/preset-env": "^7.23.2",
